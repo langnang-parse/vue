@@ -36,21 +36,25 @@ const sharedPropertyDefinition = {
 };
 
 export function proxy(target: Object, sourceKey: string, key: string) {
+  console.group(`proxy:${sourceKey},${key}`);
   sharedPropertyDefinition.get = function proxyGetter() {
+    console.log("proxyGetter", sourceKey, key);
     return this[sourceKey][key];
   };
   sharedPropertyDefinition.set = function proxySetter(val) {
+    console.log("proxySetter", sourceKey, key, val);
     this[sourceKey][key] = val;
   };
   Object.defineProperty(target, key, sharedPropertyDefinition);
+  console.groupEnd();
 }
 
 export function initState(vm: Component) {
+  console.group("initState");
   vm._watchers = [];
   const opts = vm.$options;
   if (opts.props) initProps(vm, opts.props);
   if (opts.methods) initMethods(vm, opts.methods);
-  // 检测 data 参数
   if (opts.data) {
     initData(vm);
   } else {
@@ -60,6 +64,7 @@ export function initState(vm: Component) {
   if (opts.watch && opts.watch !== nativeWatch) {
     initWatch(vm, opts.watch);
   }
+  console.groupEnd();
 }
 
 function initProps(vm: Component, propsOptions: Object) {
@@ -113,6 +118,7 @@ function initProps(vm: Component, propsOptions: Object) {
 }
 
 function initData(vm: Component) {
+  console.group("initData");
   let data = vm.$options.data;
   data = vm._data = typeof data === "function" ? getData(data, vm) : data || {};
   if (!isPlainObject(data)) {
@@ -153,6 +159,7 @@ function initData(vm: Component) {
   }
   // observe data
   observe(data, true /* asRootData */);
+  console.groupEnd();
 }
 
 export function getData(data: Function, vm: Component): any {

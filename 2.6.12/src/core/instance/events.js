@@ -57,6 +57,7 @@ export function updateComponentListeners(
 }
 
 export function eventsMixin(Vue: Class<Component>) {
+  console.group("eventsMixin");
   const hookRE = /^hook:/;
   Vue.prototype.$on = function (
     event: string | Array<string>,
@@ -129,6 +130,7 @@ export function eventsMixin(Vue: Class<Component>) {
   };
 
   Vue.prototype.$emit = function (event: string): Component {
+    console.group("$emit");
     const vm: Component = this;
     if (process.env.NODE_ENV !== "production") {
       const lowerCaseEvent = event.toLowerCase();
@@ -155,6 +157,8 @@ export function eventsMixin(Vue: Class<Component>) {
         invokeWithErrorHandling(cbs[i], vm, args, vm, info);
       }
     }
+    console.groupEnd("$emit");
     return vm;
   };
+  console.groupEnd("eventsMixin");
 }

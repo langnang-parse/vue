@@ -4,7 +4,7 @@
  * @Author: Langnang
  * @Date: 2021-05-22 13:48:32
  * @LastEditors: Langnang
- * @LastEditTime: 2021-05-22 14:28:04
+ * @LastEditTime: 2021-05-22 19:10:52
 -->
 
 # Vue 源码解析
@@ -41,3 +41,10 @@
 ## 1.原理篇
 
 - [响应式原理](/响应式原理.md)
+- 虚拟 DOM 原理
+- computed 实现原理
+- watch 实现原理
+
+## 其它
+
+- 第一次实例化发生了什么
