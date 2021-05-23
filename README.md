@@ -4,7 +4,7 @@
  * @Author: Langnang
  * @Date: 2021-05-22 13:48:32
  * @LastEditors: Langnang
- * @LastEditTime: 2021-05-22 19:10:52
+ * @LastEditTime: 2021-05-23 10:37:26
 -->
 
 # Vue 源码解析
@@ -44,6 +44,7 @@
 - 虚拟 DOM 原理
 - computed 实现原理
 - watch 实现原理
+- diff 算法原理
 
 ## 其它
 

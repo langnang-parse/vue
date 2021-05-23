@@ -36,9 +36,10 @@ function sameVnode(a, b) {
   return (
     a.key === b.key &&
     ((a.tag === b.tag &&
-      a.isComment === b.isComment &&
+      a.isComment === b.isComment && // 是否为注释节点
+      // 是否都定义了data，data包含一些具体信息，例如onclick , style
       isDef(a.data) === isDef(b.data) &&
-      sameInputType(a, b)) ||
+      sameInputType(a, b)) || // 当标签是<input>的时候，type必须相同
       (isTrue(a.isAsyncPlaceholder) &&
         a.asyncFactory === b.asyncFactory &&
         isUndef(b.asyncFactory.error)))
@@ -851,8 +852,8 @@ export function createPatchFunction(backend) {
       createElm(vnode, insertedVnodeQueue);
     } else {
       const isRealElement = isDef(oldVnode.nodeType);
-      console.warn(isRealElement);
       if (!isRealElement && sameVnode(oldVnode, vnode)) {
+        console.warn("!isRealElement && sameVnode(oldVnode, vnode");
         // patch existing root node
         patchVnode(oldVnode, vnode, insertedVnodeQueue, null, null, removeOnly);
       } else {
